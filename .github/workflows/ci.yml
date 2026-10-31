@@ -1,0 +1,30 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./scripts/check-layers.sh
+
+  # The tests on an iOS Simulator. A foldable's posture needs the iOS 27.1 SDK: the newest Xcode 27.
+  ios:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          x=$(ls -d /Applications/Xcode_27*.app 2>/dev/null | sort -V | tail -1)
+          if [ -n "$x" ]; then sudo xcode-select -s "$x"; fi
+          echo "::notice::$(xcodebuild -version | tr '\n' ' ')"
+      - name: test
+        run: |
+          sim=$(xcrun simctl list devices available -j | python3 -c 'import json,sys; d=json.load(sys.stdin)["devices"]; print(next(x["udid"] for k in sorted(d, reverse=True) if "iOS" in k for x in d[k] if x["name"].startswith("iPhone")))')
+          xcodebuild test -scheme ScreenReview -destination "platform=iOS Simulator,id=$sim"
