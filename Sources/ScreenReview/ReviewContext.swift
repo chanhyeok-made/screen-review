@@ -3,7 +3,7 @@ import SwiftUI
 import UIKit
 
 /// Where a comment was left, read from the app itself so any app gets it with `ScreenReview.start(to:)`
-/// alone (찬혁 2026-10-29: "앱별로 땜빵이 아니라 어떤 앱이든"): the screens showing, from the
+/// alone, with no per-app code: the screens showing, from the
 /// window's root to the one in front (tab, navigation stack, split columns, sheets), the window's
 /// state, and the app's own SwiftUI view types. A SwiftUI app's controllers are all hosting
 /// controllers, so the view types are read by reflection from each hosting view's root view: the

@@ -111,7 +111,7 @@ final class ReviewController: UIViewController {
 
     // A tap picks the smallest thing under the finger; the chips below show the way out from it,
     // and sliding along them moves the pick; a tap inside what is picked goes one level in there
-    // (찬혁, 2026-10-31: "클릭하고 이 안에서 선택"); 코멘트 asks for the line. While the finger is
+    // ("tap, then pick inside it"); 코멘트 asks for the line. While the finger is
     // down the outline shows what lifting it would pick.
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) { preview(touches) }
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) { preview(touches) }

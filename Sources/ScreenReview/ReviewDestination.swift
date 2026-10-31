@@ -5,7 +5,7 @@ import UIKit
 /// sheet (`ShareDestination`), to a service (worp's WorpReview), or anywhere an app plugs in.
 @MainActor
 public protocol ReviewDestination: AnyObject {
-    /// Delivers one comment and returns the line the layer shows ("찬혁의 MacBook에 남겼어요").
+    /// Delivers one comment and returns the line the layer shows ("MacBook에 남겼어요").
     /// It may ask first from `from` (pairing, a share sheet). A thrown error's
     /// `localizedDescription` is shown as it is, so say it in the person's words.
     func send(_ comment: ReviewComment, from: UIViewController) async throws -> String

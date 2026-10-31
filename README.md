@@ -69,3 +69,7 @@ The pictures are the app's own drawing, and secure fields draw as dots. Nothing 
 
 - `scripts/check-layers.sh` checks that the module imports UIKit and SwiftUI only.
 - Run the tests on an iOS Simulator: `xcodebuild test -scheme ScreenReview -destination 'platform=iOS Simulator,name=iPhone 16'`.
+
+## License
+
+MIT, see [LICENSE](LICENSE).
